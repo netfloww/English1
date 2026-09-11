@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>EngLoom | تعلم اللغة الإنجليزية بطلاقة</title>
+    <meta name="description" content="منصة EngLoom لتعلم اللغة الإنجليزية: محادثات، قواعد، مفردات، صوتيات ونطق، اختبارات، أخطاء شائعة، ونصائح تعلم.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --primary-light: #eff6ff;
+            --dark: #0f172a;
+            --text: #334155;
+            --text-light: #64748b;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+            --success-bg: #dcfce7;
+            --success-text: #15803d;
+            --success-border: #bbf7d0;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- الهيدر والقائمة --- */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0.85rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            direction: ltr;
+            cursor: pointer;
+        }
+
+        .logo span {
+            color: var(--dark);
+        }
+
+        .logo-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+        }
+
+        .desktop-nav a {
+            font-weight: 500;
+            font-size: 0.88rem;
+            color: var(--text);
+            transition: color 0.2s ease;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .desktop-nav a:hover,
+        .desktop-nav a.active {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            color: var(--dark);
+        }
+
+        .menu-toggle svg {
+            width: 26px;
+            height: 26px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-lg);
+            z-index: 999;
+            animation: slideDown 0.25s ease-out forwards;
+        }
+
+        .mobile-nav.open {
+            display: block;
+        }
+
+        .mobile-nav ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 0.65rem 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            color: var(--text);
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .mobile-nav a:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-view {
+            display: none;
+            flex-grow: 1;
+        }
+
+        .page-view.active-page {
+            display: block;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: #ffffff;
+            padding: 2.5rem 1.25rem 2rem 1.25rem;
+            text-align: center;
+            border-radius: 0 0 24px 24px;
+        }
+
+        .hero-inner {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.85rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .categories-bar-section {
+            max-width: 1140px;
+            margin: 1.5rem auto 0.5rem auto;
+            padding: 0 1.25rem;
+        }
+
+        .categories-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            overflow-x: auto;
+            padding: 0.5rem 0.25rem 0.85rem 0.25rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+
+        .category-chip {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.45rem 0.9rem;
+            border-radius: 50px;
+            white-space: nowrap;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--dark);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .category-chip:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 1.5rem auto 0 auto;
+            padding: 0 1.25rem;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 2rem;
+            transition: grid-template-columns 0.3s ease;
+        }
+
+        .container.hide-sidebar {
+            grid-template-columns: 1fr !important;
+        }
+
+        .container.hide-sidebar aside {
+            display: none !important;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--dark);
+            position: relative;
+            padding-right: 0.85rem;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 15%;
+            bottom: 15%;
+            width: 4px;
+            background-color: var(--primary);
+            border-radius: 4px;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-body {
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .tag {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+        }
+
+        .read-time {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title a:hover {
+            color: var(--primary);
+        }
+
+        .card-excerpt {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1.25rem;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            border-top: 1px solid #f1f5f9;
+            padding-top: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .widget {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+        }
+
+        .widget-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 0.5rem;
+        }
+
+        .widget-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .widget-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .widget-links a:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .single-page-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1.25rem;
+        }
+
+        .info-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .info-card h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1.25rem;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 0.75rem;
+        }
+
+        .info-card h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .info-card p, .info-card ul {
+            font-size: 0.98rem;
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .info-card ul {
+            padding-right: 1.5rem;
+            list-style-type: disc;
+        }
+
+        .info-card ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- تصميم مشغل الصوت المصغر مع شريط التقدم --- */
+        .audio-player {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 6px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 6px;
+            user-select: none;
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        .audio-player:hover {
+            background: #dbeafe;
+        }
+
+        .play-btn {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            cursor: pointer;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .progress-bar {
+            width: 120px;
+            height: 6px;
+            background: #cbd5e1;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.1s linear;
+        }
+
+        .bottom-back-wrapper {
+            margin-top: 3.5rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-bottom-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--surface);
+            color: var(--primary);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1.75rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-bottom-back:hover {
+            background-color: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-form .full-width {
+            grid-column: span 2;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group label {
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--dark);
+        }
+
+        .form-group input, .form-group textarea {
+            padding: 0.85rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .form-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-submit {
+            background-color: var(--primary);
+            color: #fff;
+            padding: 0.85rem 1.75rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .alert-success-box {
+            display: none;
+            background-color: var(--success-bg);
+            color: var(--success-text);
+            border: 1px solid var(--success-border);
+            padding: 1.25rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-align: center;
+            font-size: 1.05rem;
+            margin-top: 1.5rem;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: #94a3b8;
+            margin-top: auto;
+            padding: 2.5rem 1.25rem 1.5rem 1.25rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.25rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.25rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: #64748b;
+            border-top: 1px solid #1e293b;
+            width: 100%;
+            padding-top: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        @media (max-width: 991px) {
+            .container {
+                grid-template-columns: 1fr !important;
+            }
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            .contact-form .full-width {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .desktop-nav {
+                display: none;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero {
+                padding: 2rem 1rem 1.5rem 1rem;
+                border-radius: 0 0 16px 16px;
+            }
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            .hero p {
+                font-size: 0.9rem;
+            }
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+            .info-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر -->
+    <header>
+        <div class="header-container">
+            <a onclick="showSection('all')" class="logo">
+                Eng<span>Loom</span>
+                <span class="logo-dot"></span>
+            </a>
+
+            <nav class="desktop-nav">
+                <a onclick="showSection('all')" id="nav-all" class="active">الرئيسية</a>
+                <a onclick="showSection('talk')" id="nav-talk">المحادثة</a>
+                <a onclick="showSection('gram')" id="nav-gram">القواعد</a>
+                <a onclick="showSection('word')" id="nav-word">المفردات</a>
+                <a onclick="showSection('voce')" id="nav-voce">الصوتيات والنطق</a>
+                <a onclick="showSection('quze')" id="nav-quze">الاختبارات</a>
+                <a onclick="showSection('mastk')" id="nav-mastk">الأخطاء الشائعة</a>
+                <a onclick="showSection('devace')" id="nav-devace">نصائح التعلم</a>
+            </nav>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="قائمة التصفح">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <nav class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a onclick="showSection('all'); closeMobileMenu();">الرئيسية</a></li>
+                <li><a onclick="showSection('talk'); closeMobileMenu();">المحادثة</a></li>
+                <li><a onclick="showSection('gram'); closeMobileMenu();">القواعد</a></li>
+                <li><a onclick="showSection('word'); closeMobileMenu();">المفردات</a></li>
+                <li><a onclick="showSection('voce'); closeMobileMenu();">الصوتيات والنطق</a></li>
+                <li><a onclick="showSection('quze'); closeMobileMenu();">الاختبارات</a></li>
+                <li><a onclick="showSection('mastk'); closeMobileMenu();">الأخطاء الشائعة</a></li>
+                <li><a onclick="showSection('devace'); closeMobileMenu();">نصائح التعلم</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- الصفحة الرئيسية -->
+    <div id="home-page" class="page-view active-page">
+        <section class="hero">
+            <div class="hero-inner">
+                <span class="hero-badge">تعلم الإنجليزية بأسلوب حديث</span>
+                <h1>طريقك السريع لإتقان اللغة الإنجليزية</h1>
+                <p>دروس مبسطة، نصائح مجربة، اختبارات تفاعلية، وتصحيح الأخطاء الشائعة لتصل إلى الطلاقة بثقة.</p>
+            </div>
+        </section>
+
+        <section class="categories-bar-section">
+            <div class="categories-bar">
+                <a class="category-chip" onclick="showSection('talk')"><span>🗣️</span> <span>المحادثة</span></a>
+                <a class="category-chip" onclick="showSection('gram')"><span>📚</span> <span>القواعد</span></a>
+                <a class="category-chip" onclick="showSection('word')"><span>🔤</span> <span>المفردات</span></a>
+                <a class="category-chip" onclick="showSection('voce')"><span>🎙️</span> <span>الصوتيات والنطق</span></a>
+                <a class="category-chip" onclick="showSection('quze')"><span>📝</span> <span>الاختبارات</span></a>
+                <a class="category-chip" onclick="showSection('mastk')"><span>❌</span> <span>الأخطاء الشائعة</span></a>
+                <a class="category-chip" onclick="showSection('devace')"><span>💡</span> <span>نصائح التعلم</span></a>
+            </div>
+        </section>
+
+        <div class="container" id="mainContainer">
+            <main>
+                <div class="section-header">
+                    <h2 class="section-title" id="currentSectionTitle">أحدث الدروس والنصائح</h2>
+                </div>
+
+                <div class="posts-grid" id="postsContainer"></div>
+
+                <div class="bottom-back-wrapper" id="categoryBackBtn" style="display: none;">
+                    <button class="btn-bottom-back" onclick="showSection('all')">🏠 العودة للصفحة الرئيسية</button>
+                </div>
+            </main>
+
+            <aside id="mainSidebar" class="sidebar">
+                <div class="widget">
+                    <h3 class="widget-title">أقسام سريعة</h3>
+                    <div class="widget-links">
+                        <a onclick="showSection('devace')"><span>كيف تكتسب اللغة بدون ملل؟</span> <span>←</span></a>
+                        <a onclick="showSection('quze')"><span>اختبارات تحديد المستوى</span> <span>←</span></a>
+                        <a onclick="showSection('mastk')"><span>أبرز أخطاء الترجمة</span> <span>←</span></a>
+                        <a onclick="showSection('voce')"><span>سر النطق الأمريكي الصحيح</span> <span>←</span></a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- صفحة تفاصيل الدرس -->
+    <div id="lesson-page" class="page-view">
+        <div class="single-page-container">
+            <div class="info-card" id="lessonContent"></div>
+            
+            <div class="bottom-back-wrapper">
+                <button class="btn-bottom-back" id="btnBackToCat" onclick="backToCurrentCategory()">↩ العودة لدروس القسم</button>
+                <button class="btn-bottom-back" onclick="showSection('all')">🏠 الرئيسية</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- الصفحات الفرعية ومعلومات الموقع -->
+    <div id="about-page" class="page-view">
+        <div class="single-page-container">
+            <div class="info-card">
+                <h1>💡 من نحن (About Us)</h1>
+                <p>مرحباً بك في منصة <strong>EngLoom</strong>، وجهتك الأولى لتعلم اللغة الإنجليزية بطريقة تفاعلية ومبسطة.</p>
+                
+                <h2>رؤيتنا وهدفنا</h2>
+                <p>تأسست منصة EngLoom بهدف جعل تعلم اللغة الإنجليزية متاحاً وسهلاً للجميع. نؤمن بأن تعلم لغة جديدة لا ينبغي أن يكون معقداً، بل تجربة ممتعة ومستمرة تعتمد على التطبيق العملي والممارسة اليومية.</p>
+
+                <h2>ماذا نقدم في EngLoom؟</h2>
+                <p>نعمل على توفير دروس متكاملة تشمل كافة الجوانب الأساسية لتطوير مهارات اللغة الإنجليزية:</p>
+                <ul>
+                    <li><strong>المحادثة اليومية:</strong> جمل وعبارات جاهزة للاستخدام في مختلف المواقف الحياتية مع خاصية الاستماع للنطق الصحيح.</li>
+                    <li><strong>القواعد المبسطة:</strong> شرح الأزمان والتركيبات النحوية بأسلوب سلس ومباشر بعيداً عن التعقيد.</li>
+                    <li><strong>تنمية المفردات:</strong> مصطلحات متخصصة في مختلف المجالات.</li>
+                    <li><strong>الصوتيات والنطق:</strong> قواعد تحسين اللهجة وإتقان مخارج الحروف.</li>
+                    <li><strong>اختبارات ونصائح تعليمية:</strong> أدوات لتقييم مستواك واستراتيجيات مجربة لتسريع عملية التعلم.</li>
+                </ul>
+
+                <h2>التزامنا تجاه المتعلمين</h2>
+                <p>نحرص في EngLoom على تقديم محتوى تعليمي موثوق، محدث، وحصري يُراعي جميع المستويات، بدءاً من المبتدئين وحتى الراغبين في تطوير مهاراتهم للعمل أو السفر.</p>
+            </div>
+            <div class="bottom-back-wrapper">
+                <button class="btn-bottom-back" onclick="showSection('all')">🏠 العودة للرئيسية</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-page" class="page-view">
+        <div class="single-page-container">
+            <div class="info-card">
+                <h1>📬 اتصل بنا (Contact Us)</h1>
+                <form id="contactForm" class="contact-form" action="https://formspree.io/f/mbgjqeww" method="POST">
+                    <div class="form-group">
+                        <label>الاسم الكامل</label>
+                        <input type="text" name="name" placeholder="أدخل اسمك" required>
+                    </div>
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" name="email" placeholder="example@mail.com" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>الرسالة</label>
+                        <textarea name="message" rows="5" placeholder="اكتب استفسارك..." required></textarea>
+                    </div>
+                    <div class="form-actions full-width">
+                        <button type="submit" id="btnSubmit" class="btn-submit">إرسال الرسالة</button>
+                    </div>
+                </form>
+                <div id="successMessage" class="alert-success-box">✨ تم إرسال رسالتك بنجاح!</div>
+            </div>
+            <div class="bottom-back-wrapper">
+                <button class="btn-bottom-back" onclick="showSection('all')">🏠 العودة للرئيسية</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="privacy-page" class="page-view">
+        <div class="single-page-container">
+            <div class="info-card">
+                <h1>🔒 سياسة الخصوصية</h1>
+                <p>أهلاً بك في منصة <strong>EngLoom</strong>. نحن نولي أهمية قصوى لخصوصية زوارنا، وتوضح هذه الوثيقة أنواع المعلومات الشخصية التي نجمعها وكيفية استخدامها.</p>
+
+                <h2>1. ملفات تعريف الارتباط (Cookies) وسجلات الشبكة</h2>
+                <p>تستخدم منصة EngLoom ملفات الكوكيز لتخزين المعلومات حول تفضيلات الزوار، وتسجيل معلومات خاصة بالمسخدم لمعرفة الصفحات التي يزورها، وذلك لتحسين تجربة المستخدم وتقديم محتوى تعليمي يناسب احتياجاته.</p>
+
+                <h2>2. إعلانات Google AdSense وملفات كوكيز DART</h2>
+                <p>بصفتها مورداً لطرف ثالث، تستخدم Google ملفات تعريف الارتباط لعرض الإعلانات على موقعنا:</p>
+                <ul>
+                    <li>يسمح استخدام Google لملف تعريف الارتباط DART بعرض الإعلانات للمستخدمين استناداً إلى زيارتهم لمنصتنا ومواقع أخرى على الإنترنت.</li>
+                    <li>يمكن للمستخدمين تعطيل استخدام ملف تعريف الارتباط DART بزيارة <a href="https://policies.google.com/technologies/ads" target="_blank" style="color: var(--primary);">سياسة الخصوصية الخاصة بشبكة Google الإعلانية للمحتوى</a>.</li>
+                </ul>
+
+                <h2>3. شركاء الإعلانات وروابط الأطراف الثالثة</h2>
+                <p>قد يستخدم بعض شركائنا الإعلانيين (مثل Google AdSense) ملفات الكوكيز والويب بيكونز على موقعنا. تعمل شبكات الإعلانات هذه تلقائياً على استلام عنوان IP الخاص بك عند ظهور الإعلان، لقياس مدى فعالية الحملات الإعلانية وتخصيص المحتوى.</p>
+
+                <h2>4. موافقتك على السياسة</h2>
+                <p>باستخدامك لمنصتنا التعليمية EngLoom، فإنك توافق على سياسة الخصوصية الخاصة بنا وتقر بشروطها.</p>
+            </div>
+            <div class="bottom-back-wrapper">
+                <button class="btn-bottom-back" onclick="showSection('all')">🏠 العودة للرئيسية</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="terms-page" class="page-view">
+        <div class="single-page-container">
+            <div class="info-card">
+                <h1>📜 شروط الاستخدام</h1>
+                <p>أهلاً بك في منصة <strong>EngLoom</strong>. بدخولك واستخدامك لهذه المنصة، فإنك توافق على الالتزام بالبنود والشروط الواردة أدناه. يرجى قراءتها بعناية قبل استخدام الخدمات.</p>
+
+                <h2>1. الاستخدام المسموح به</h2>
+                <p>جميع المواد الدروسية، الصوتيات، والنصوص المتاحة على منصة EngLoom هي لأغراض تعليمية وشخصية غير تجارية فقط. لا يُسمح باستخدام المحتوى بطريقة تضر بالمنصة أو تحاول تعطيل خدماتها.</p>
+
+                <h2>2. حقوق الملكية الفكرية</h2>
+                <p>جميع حقوق النشر والملكية الفكرية الخاصة بالمحتوى المكتوب، التصاميم، والهيكلية البرمجية محفوظة لمنصة EngLoom. يُمنع نسخ، إعادة إنتاج، أو إعادة توزيع المحتوى على منصات أو مواقع أخرى دون الحصول على إذن كتابي مسبق.</p>
+
+                <h2>3. إخلاء المسؤولية</h2>
+                <p>نحن نعمل بجد لتقديم معلومات دقيقة ومحدثة باستمرار لتعلم اللغة الإنجليزية، ولكننا لا نضمن خلو المحتوى تماماً من الأخطاء غير المقصودة، ولا نتحمل المسؤولية عن أي نتائج ناتجة عن استخدام هذه المعلومات.</p>
+
+                <h2>4. روابط المواقع الخارجية</h2>
+                <p>قد تحتوي منصتنا على روابط لمواقع خارجية ليس لنا أي سيطرة عليها. نحن غير مسؤولين عن محتوى أو سياسات الخصوصية الخاصة بتلك المواقع المستقلة.</p>
+
+                <h2>5. التعديل على الشروط</h2>
+                <p>تحتفظ منصة EngLoom بالحق في تعديل أو تحديث هذه الشروط في أي وقت دون إشعار مسبق.</p>
+            </div>
+            <div class="bottom-back-wrapper">
+                <button class="btn-bottom-back" onclick="showSection('all')">🏠 العودة للرئيسية</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-links">
+                <a onclick="showPage('about-page')">من نحن</a>
+                <a onclick="showPage('contact-page')">اتصل بنا</a>
+                <a onclick="showPage('privacy-page')">سياسة الخصوصية</a>
+                <a onclick="showPage('terms-page')">شروط الاستخدام</a>
+            </div>
+            <div class="copyright">&copy; 2026 EngLoom. جميع الحقوق محفوظة.</div>
+        </div>
+    </footer>
+
+    <!-- البرمجة السلوكية (JavaScript) -->
+    <script>
+        const lessonsByCat = {
+            talk: [], gram: [], word: [], voce: [], quze: [], mastk: [], devace: []
+        };
+
+        const prefixes = ['talk', 'gram', 'word', 'voce', 'quze', 'mastk', 'devace'];
+        let currentFilter = 'all'; 
+        let activeLessonCategory = 'all';
+
+        function addLesson(lesson) {
+            if (lessonsByCat[lesson.categoryKey]) {
+                lessonsByCat[lesson.categoryKey].push(lesson);
+                renderLessons();
+            }
+        }
+
+        function loadLessons() {
+            prefixes.forEach(prefix => {
+                let index = 1;
+                function loadNext() {
+                    const script = document.createElement('script');
+                    script.src = `${prefix}${index}.js`;
+                    script.onload = () => { index++; loadNext(); };
+                    script.onerror = () => {};
+                    document.body.appendChild(script);
+                }
+                loadNext();
+            });
+        }
+
+        function renderLessons() {
+            const container = document.getElementById('postsContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            let displayList = [];
+
+            if (currentFilter === 'all') {
+                prefixes.forEach(catKey => {
+                    const list = lessonsByCat[catKey];
+                    if (list && list.length > 0) {
+                        displayList.push(list[list.length - 1]);
+                    }
+                });
+            } else {
+                displayList = lessonsByCat[currentFilter] || [];
+            }
+
+            if (displayList.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-light); padding: 2rem;">لا توجد دروس حالياً في هذا القسم.</p>';
+                return;
+            }
+
+            displayList.forEach(lesson => {
+                const card = document.createElement('article');
+                card.className = 'card';
+                card.onclick = () => openLesson(lesson);
+
+                card.innerHTML = `
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="tag" style="background:${lesson.bg || '#e0f2fe'}; color:${lesson.color || '#0369a1'};">${lesson.categoryName}</span>
+                            <span class="read-time">${lesson.time || 'قراءة 3 دقائق'}</span>
+                        </div>
+                        <h3 class="card-title"><a>${lesson.title}</a></h3>
+                        <p class="card-excerpt">${lesson.excerpt}</p>
+                        <div class="card-footer">
+                            <span>عرض الدرس</span>
+                            <span>←</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function showSection(key) {
+            currentFilter = key;
+            activeLessonCategory = key;
+            showPage('home-page');
+
+            const mainContainer = document.getElementById('mainContainer');
+            const categoryBackBtn = document.getElementById('categoryBackBtn');
+
+            if (key === 'all') {
+                mainContainer.classList.remove('hide-sidebar');
+                if (categoryBackBtn) categoryBackBtn.style.display = 'none';
+            } else {
+                mainContainer.classList.add('hide-sidebar');
+                if (categoryBackBtn) categoryBackBtn.style.display = 'flex';
+            }
+
+            document.querySelectorAll('.desktop-nav a').forEach(a => a.classList.remove('active'));
+            const activeNav = document.getElementById(`nav-${key}`);
+            if (activeNav) activeNav.classList.add('active');
+
+            const sectionTitles = {
+                'all': 'أحدث الدروس والنصائح',
+                'talk': 'دروس المحادثة',
+                'gram': 'دروس القواعد',
+                'word': 'قسم المفردات',
+                'voce': 'الصوتيات والنطق',
+                'quze': 'الاختبارات والتطبيقات',
+                'mastk': 'الأخطاء الشائعة',
+                'devace': 'نصائح التعلم'
+            };
+
+            const titleEl = document.getElementById('currentSectionTitle');
+            if (titleEl) titleEl.innerText = sectionTitles[key] || 'الدروس';
+
+            renderLessons();
+        }
+
+        function openLesson(lesson) {
+            const content = document.getElementById('lessonContent');
+            content.innerHTML = `
+                <div class="card-meta" style="margin-bottom:1rem;">
+                    <span class="tag" style="background:${lesson.bg || '#e0f2fe'}; color:${lesson.color || '#0369a1'};">${lesson.categoryName}</span>
+                    <span class="read-time">${lesson.time || ''}</span>
+                </div>
+                <h1>${lesson.title}</h1>
+                <div>${lesson.content}</div>
+            `;
+
+            const btnBackToCat = document.getElementById('btnBackToCat');
+            if (btnBackToCat) {
+                btnBackToCat.innerText = `↩ العودة لدروس ${lesson.categoryName}`;
+            }
+
+            showPage('lesson-page');
+        }
+
+        function backToCurrentCategory() {
+            showSection(activeLessonCategory);
+        }
+
+        /* --- مشغل الصوت المصغر مع شريط التقدم --- */
+        let currentUtterance = null;
+        let activePlayer = null;
+        let progressInterval = null;
+
+        function playAudio(text, playerElement) {
+            if (!('speechSynthesis' in window)) {
+                alert("متصفحك لا يدعم خاصية نطق الصوتيات التلقائي.");
+                return;
+            }
+
+            resetAudioPlayer();
+            window.speechSynthesis.cancel();
+
+            const playBtn = playerElement.querySelector('.play-btn');
+            const progressFill = playerElement.querySelector('.progress-fill');
+            activePlayer = playerElement;
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.85;
+
+            const estimatedDuration = Math.max((text.length / 10) * 1000, 1200);
+            let startTime = Date.now();
+
+            utterance.onstart = () => {
+                playBtn.innerText = '⏸';
+                progressInterval = setInterval(() => {
+                    let elapsed = Date.now() - startTime;
+                    let percentage = Math.min((elapsed / estimatedDuration) * 100, 98);
+                    progressFill.style.width = percentage + '%';
+                }, 50);
+            };
+
+            utterance.onend = () => {
+                progressFill.style.width = '100%';
+                setTimeout(() => { resetAudioPlayer(); }, 200);
+            };
+
+            utterance.onerror = () => {
+                resetAudioPlayer();
+            };
+
+            currentUtterance = utterance;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function resetAudioPlayer() {
+            if (progressInterval) clearInterval(progressInterval);
+            if (activePlayer) {
+                const playBtn = activePlayer.querySelector('.play-btn');
+                const progressFill = activePlayer.querySelector('.progress-fill');
+                if (playBtn) playBtn.innerText = '▶';
+                if (progressFill) progressFill.style.width = '0%';
+            }
+            activePlayer = null;
+            currentUtterance = null;
+        }
+
+        window.addEventListener('DOMContentLoaded', loadLessons);
+
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                mobileNav.classList.toggle('open');
+            });
+        }
+
+        function closeMobileMenu() {
+            if (mobileNav) mobileNav.classList.remove('open');
+        }
+
+        function showPage(pageId) {
+            resetAudioPlayer();
+            window.speechSynthesis.cancel();
+
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(page => {
+                page.classList.remove('active-page');
+            });
+
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.add('active-page');
+            }
+
+            if (pageId === 'contact-page') {
+                document.getElementById('contactForm').reset();
+                document.getElementById('contactForm').style.display = 'grid';
+                document.getElementById('successMessage').style.display = 'none';
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const btnSubmit = document.getElementById('btnSubmit');
+                btnSubmit.innerText = "جاري الإرسال...";
+                btnSubmit.disabled = true;
+
+                const formData = new FormData(contactForm);
+
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        contactForm.style.display = 'none';
+                        document.getElementById('successMessage').style.display = 'block';
+                    } else {
+                        alert('عذراً، حدث خطأ أثناء إرسال الرسالة.');
+                    }
+                } catch (error) {
+                    alert('حدث خطأ في الاتصال بالشبكة.');
+                } finally {
+                    btnSubmit.innerText = "إرسال الرسالة";
+                    btnSubmit.disabled = false;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
